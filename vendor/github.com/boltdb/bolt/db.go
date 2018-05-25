@@ -154,6 +154,7 @@ func Open(path string, mode os.FileMode, options *Options) (*DB, error) {
 	if options == nil {
 		options = DefaultOptions
 	}
+	db.StrictMode = true
 	db.NoGrowSync = options.NoGrowSync
 	db.MmapFlags = options.MmapFlags
 
