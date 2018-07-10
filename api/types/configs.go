@@ -51,6 +51,8 @@ type ExecConfig struct {
 	DetachKeys   string   // Escape keys for detach
 	Env          []string // Environment variables
 	Cmd          []string // Execution commands and args
+	Width        uint     // Inital terminal width
+	Height       uint     // Inital terminal height
 }
 
 // PluginRmConfig holds arguments for plugin remove.

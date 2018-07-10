@@ -33,6 +33,8 @@ type Config struct {
 	User         string
 	Env          []string
 	Pid          int
+	Width        int
+	Height       int
 }
 
 // NewConfig initializes the a new exec configuration

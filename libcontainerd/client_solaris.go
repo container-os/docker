@@ -26,7 +26,7 @@ func (clnt *client) GetServerVersion(ctx context.Context) (*ServerVersion, error
 	return sv, nil
 }
 
-func (clnt *client) AddProcess(ctx context.Context, containerID, processFriendlyName string, specp Process, attachStdio StdioCallback) (int, error) {
+func (clnt *client) AddProcess(ctx context.Context, containerID, processFriendlyName string, specp Process, attachStdio StdioCallback, w int, h int) (int, error) {
 	return -1, nil
 }
 

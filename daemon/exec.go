@@ -123,6 +123,8 @@ func (d *Daemon) ContainerExecCreate(name string, config *types.ExecConfig) (str
 	execConfig.Tty = config.Tty
 	execConfig.Privileged = config.Privileged
 	execConfig.User = config.User
+	execConfig.Width = int(config.Width)
+	execConfig.Height = int(config.Height)
 
 	linkedEnv, err := d.setupLinkedContainers(container)
 	if err != nil {
@@ -232,7 +234,7 @@ func (d *Daemon) ContainerExecStart(ctx context.Context, name string, stdin io.R
 	ec.StreamConfig.AttachStreams(&attachConfig)
 	attachErr := ec.StreamConfig.CopyStreams(ctx, &attachConfig)
 
-	systemPid, err := d.containerd.AddProcess(ctx, c.ID, name, p, ec.InitializeStdio)
+	systemPid, err := d.containerd.AddProcess(ctx, c.ID, name, p, ec.InitializeStdio, ec.Width, ec.Height)
 	// the exec context should be ready, or error happened.
 	// close the chan to notify readiness
 	close(ec.Started)

@@ -190,6 +190,8 @@ type AddProcessRequest struct {
 	SelinuxLabel    string    `protobuf:"bytes,13,opt,name=selinuxLabel" json:"selinuxLabel,omitempty"`
 	NoNewPrivileges bool      `protobuf:"varint,14,opt,name=noNewPrivileges" json:"noNewPrivileges,omitempty"`
 	Rlimits         []*Rlimit `protobuf:"bytes,15,rep,name=rlimits" json:"rlimits,omitempty"`
+	Width           uint32    `protobuf:"varint,16,opt,name=width" json:"width,omitempty"`
+	Height          uint32    `protobuf:"varint,17,opt,name=height" json:"height,omitempty"`
 }
 
 func (m *AddProcessRequest) Reset()                    { *m = AddProcessRequest{} }

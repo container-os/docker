@@ -45,7 +45,7 @@ func (clnt *client) GetServerVersion(ctx context.Context) (*ServerVersion, error
 // AddProcess is the handler for adding a process to an already running
 // container. It's called through docker exec. It returns the system pid of the
 // exec'd process.
-func (clnt *client) AddProcess(ctx context.Context, containerID, processFriendlyName string, specp Process, attachStdio StdioCallback) (pid int, err error) {
+func (clnt *client) AddProcess(ctx context.Context, containerID, processFriendlyName string, specp Process, attachStdio StdioCallback, w int, h int) (pid int, err error) {
 	clnt.lock(containerID)
 	defer clnt.unlock(containerID)
 	container, err := clnt.getContainer(containerID)
@@ -99,6 +99,8 @@ func (clnt *client) AddProcess(ctx context.Context, containerID, processFriendly
 		SelinuxLabel:    sp.SelinuxLabel,
 		NoNewPrivileges: sp.NoNewPrivileges,
 		Rlimits:         convertRlimits(sp.Rlimits),
+		Width:           uint32(w),
+		Height:          uint32(h),
 	}
 
 	fifoCtx, cancel := context.WithCancel(context.Background())

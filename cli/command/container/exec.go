@@ -81,6 +81,12 @@ func runExec(dockerCli *command.DockerCli, opts *execOptions, container string, 
 	ctx := context.Background()
 	client := dockerCli.Client()
 
+	if execConfig.Tty {
+		height, width := dockerCli.Out().GetTtySize()
+		execConfig.Height = height
+		execConfig.Width = width
+	}
+
 	response, err := client.ContainerExecCreate(ctx, container, *execConfig)
 	if err != nil {
 		return err
