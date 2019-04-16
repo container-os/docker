@@ -167,6 +167,7 @@ func (r *remote) handleConnectionChange() {
 				transientFailureCount = 0
 				if utils.IsProcessAlive(r.daemonPid) {
 					utils.KillProcess(r.daemonPid)
+					logrus.Warnf("libcontainerd: killed containerd process, pid: %d", r.daemonPid)
 				}
 				<-r.daemonWaitCh
 				if err := r.runContainerdDaemon(); err != nil { //FIXME: Handle error
